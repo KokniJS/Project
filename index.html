@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style >
+
+
+        ul { 
+            margin-top: 50px;
+            list-style: none; 
+            display: flex;
+
+        }
+
+        a {
+            padding: 16px;
+            text-decoration: none;
+            background: #41aedc;
+            color: #fff;
+        }
+
+        a:hover { background: #fd9c10; }
+
+    </style>
+
+</head>
+<body>
+ 
+    <h2>Создать меню</h2>
+
+    <form name="formMemu">
+
+      <p>Пункты меню: <input type="text" style="width: 300px" name="elemMenu" value="Главная, О компании, Новости"></p>  
+      <p>Цвет текста: <input type="color" name="fCOlor" value="#ffffff"></p> 
+      <p>Цвет фона: <input type="color" name="bCOlor" value="#41aedc"></p> 
+      <p>Цвет hover: <input type="color" name="hCOlor" value="#fd9c10"></p> 
+
+    <p><input type="button" name="but" value="Создать меню" onclick="menu()">
+    <span id="del"></span>
+    </p>
+
+    </form>
+
+    <style id="mystyle"></style>
+    <p id="mymenu"></p>
+    <div id="big"></div>
+
+    <script>
+
+        function menu() {
+
+        let elemMenu = formMemu.elemMenu.value,
+            fc = formMemu.fCOlor.value,
+            bc = formMemu.bCOlor.value,
+            hc = formMemu.hCOlor.value;
+
+        //  alert(elemMenu+" "+fc+" "+bc+" "+hc);   
+        let arrMenu = elemMenu.split(', ');
+
+            let s="", s1="", s2="", mylist="";
+
+           for (i=0; i<arrMenu.length; i++) {
+               s+= `<li onclick="bigp(${i+1})"><a href="#">${arrMenu[i]}</a></li>`;    
+           } 
+
+           mylist = `<ul>${s}</ul>`;
+
+
+            s1 = `
+            
+            a {
+            background: ${bc};
+            color: ${fc};
+        }
+
+        a:hover { background: ${hc}; }
+            
+            `;
+
+            // alert(s1);
+           mystyle.innerHTML = s1;
+           mymenu.innerHTML = mylist;
+
+           formMemu.but.value = "Изменить меню";
+           del.innerHTML = `
+           
+           <input type="button" value="Удалить меню" 
+           onclick="delet()">
+           
+           `;
+ 
+        }
+
+        function delet() {
+            mymenu.innerHTML =''; 
+           formMemu.but.value = "Создать меню";
+           big.innerHTML ='';
+           del.innerHTML ='';
+            }
+
+            function bigp(p) {
+                s2= `
+                <img onclick="big.innerHTML =''" 
+                src="images/${p}.jpg">`;
+                big.innerHTML = s2;
+            }
+
+
+    </script>
+
+    <!-- <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О компании</a></li>
+        <li><a href="#">Новости</a></li>
+    </ul> -->
+
+
+</body>
+</html>
